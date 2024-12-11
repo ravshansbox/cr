@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "scripts": {
+    "format": "prettier --ignore-unknown --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
 }
