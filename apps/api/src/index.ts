@@ -1,5 +1,7 @@
 import pgMigrate from 'node-pg-migrate';
 import { DATABASE_URL, MIGRATIONS_DIR, MIGRATIONS_TABLE } from './constants';
+import { seed } from './seed';
+import { pool } from './pool';
 
 (async () => {
   await pgMigrate({
@@ -8,4 +10,5 @@ import { DATABASE_URL, MIGRATIONS_DIR, MIGRATIONS_TABLE } from './constants';
     direction: 'up',
     migrationsTable: MIGRATIONS_TABLE,
   });
+  await seed(pool);
 })().catch(console.error);
