@@ -27,7 +27,7 @@ type Process<RequestParams, RequestBody, ResponseBody> = (
 ) => Promise<HttpResponse<ResponseBody>>;
 
 type CreateHandlerOptions<RequestParams, RequestBody, ResponseBody> = {
-  bodySchema: zod.ZodSchema<RequestBody>;
+  bodySchema?: zod.ZodSchema<RequestBody>;
   process: Process<RequestParams, RequestBody, ResponseBody>;
 };
 
@@ -42,7 +42,9 @@ export const createHandler = <RequestParams, RequestBody, ResponseBody>({
   return async (request, response) => {
     const { status, body } = await process({
       params: request.params,
-      body: bodySchema.parse(request.body),
+      body: bodySchema
+        ? bodySchema.parse(request.body)
+        : (undefined as RequestBody),
     });
     response.status(status).json(body);
   };
