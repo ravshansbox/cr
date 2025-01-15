@@ -4,16 +4,11 @@ import { tokenDao } from '../../daos/tokens';
 import { userDao } from '../../daos/users';
 import { pool } from '../../pool';
 import { HttpError } from '../../exceptions';
-import {
-  createHandler,
-  createRoute,
-  Endpoint,
-  Fetcher,
-  HttpResponse,
-} from '../../http';
+import { createHandler, createRoute, Fetcher, HttpResponse } from '../../http';
+import { createTokenEndpoint } from '../../endpoints';
 
 export const createToken = createRoute({
-  endpoint: new Endpoint('post', '/tokens'),
+  endpoint: createTokenEndpoint,
   handler: createHandler({
     bodySchema: zod.object({
       username: zod.string(),

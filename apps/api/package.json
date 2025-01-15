@@ -2,6 +2,7 @@
   "name": "@cloudretail/api",
   "version": "1.0.0",
   "type": "module",
+  "exports": "./src/exports.ts",
   "scripts": {
     "build": "tsc --outDir dist",
     "docker:compose:up": "docker compose up -d",
