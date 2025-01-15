@@ -8,23 +8,40 @@ export class HttpResponse<Body> {
   ) {}
 }
 
-type CreateHandlerOptions<RequestBody, ResponseBody> = {
+type Method = 'get' | 'post' | 'put' | 'delete';
+
+export class Endpoint<_RequestParams> {
+  constructor(
+    public readonly method: Method,
+    public readonly path: string,
+  ) {}
+}
+
+type Context<RequestParams, RequestBody> = {
+  params: RequestParams;
+  body: RequestBody;
+};
+
+type Process<RequestParams, RequestBody, ResponseBody> = (
+  context: Context<RequestParams, RequestBody>,
+) => Promise<HttpResponse<ResponseBody>>;
+
+type CreateHandlerOptions<RequestParams, RequestBody, ResponseBody> = {
   bodySchema: zod.ZodSchema<RequestBody>;
-  process: (params: {
-    body: RequestBody;
-  }) => Promise<HttpResponse<ResponseBody>>;
+  process: Process<RequestParams, RequestBody, ResponseBody>;
 };
 
 export const createHandler = <RequestParams, RequestBody, ResponseBody>({
   bodySchema,
   process,
-}: CreateHandlerOptions<RequestBody, ResponseBody>): express.RequestHandler<
+}: CreateHandlerOptions<
   RequestParams,
-  ResponseBody,
-  RequestBody
-> => {
+  RequestBody,
+  ResponseBody
+>): express.RequestHandler<RequestParams, ResponseBody, RequestBody> => {
   return async (request, response) => {
     const { status, body } = await process({
+      params: request.params,
       body: bodySchema.parse(request.body),
     });
     response.status(status).json(body);
@@ -32,8 +49,7 @@ export const createHandler = <RequestParams, RequestBody, ResponseBody>({
 };
 
 type Route<RequestParams, RequestBody, ResponseBody> = {
-  method: 'get' | 'post' | 'put' | 'delete';
-  path: string;
+  endpoint: Endpoint<RequestParams>;
   handler: express.RequestHandler<RequestParams, ResponseBody, RequestBody>;
 };
 
@@ -45,7 +61,7 @@ export const registerRoute = <RequestParams, RequestBody, ResponseBody>(
   router: express.Router,
   route: Route<RequestParams, RequestBody, ResponseBody>,
 ) => {
-  router[route.method](route.path, route.handler);
+  router[route.endpoint.method](route.endpoint.path, route.handler);
 };
 
 export type Fetcher<Handler> =
@@ -54,8 +70,5 @@ export type Fetcher<Handler> =
     infer ResponseBody,
     infer RequestBody
   >
-    ? (options: {
-        params: RequestParams;
-        body: RequestBody;
-      }) => Promise<ResponseBody>
+    ? (context: Context<RequestParams, RequestBody>) => Promise<ResponseBody>
     : never;
