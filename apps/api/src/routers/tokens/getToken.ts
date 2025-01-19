@@ -1,7 +1,12 @@
-import { createHandler, createRoute, Fetcher, HttpResponse } from '../../http';
-import { tokenDao } from '../../daos/tokens';
-import { pool } from '../../pool';
-import { getTokenEndpoint } from '../../endpoints';
+import {
+  createHandler,
+  createRoute,
+  Fetcher,
+  HttpResponse,
+} from '../../http.js';
+import { tokenDao } from '../../daos/tokens/index.js';
+import { pool } from '../../pool.js';
+import { getTokenEndpoint } from '../../endpoints.js';
 
 export const getToken = createRoute({
   endpoint: getTokenEndpoint,

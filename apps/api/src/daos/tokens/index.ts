@@ -1,5 +1,5 @@
-import { createToken } from './createToken';
-import { selectById } from './selectById';
+import { createToken } from './createToken.js';
+import { selectById } from './selectById.js';
 
 export const tokenDao = {
   createToken,

@@ -1,5 +1,5 @@
 import { sql } from '@ts-safeql/sql-tag';
-import { DbClient, getRow } from '../../pool';
+import { DbClient, getRow } from '../../pool.js';
 
 export const selectById = (client: DbClient, values: { id: number }) => {
   return getRow(

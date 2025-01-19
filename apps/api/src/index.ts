@@ -1,13 +1,13 @@
-import pgMigrate from 'node-pg-migrate';
+import { runner as pgMigrate } from 'node-pg-migrate';
 import {
   DATABASE_URL,
   HTTP_PORT,
   MIGRATIONS_DIR,
   MIGRATIONS_TABLE,
-} from './constants';
-import { seed } from './seed';
-import { pool } from './pool';
-import { app } from './app';
+} from './constants.js';
+import { seed } from './seed.js';
+import { pool } from './pool.js';
+import { app } from './app.js';
 
 (async () => {
   await pgMigrate({
