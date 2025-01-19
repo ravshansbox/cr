@@ -1,6 +1,6 @@
 import pg from 'pg';
-import { DATABASE_URL } from './constants';
-import { MultipleRecordsFound, NoRecordFound } from './exceptions';
+import { DATABASE_URL } from './constants.js';
+import { MultipleRecordsFound, NoRecordFound } from './exceptions/index.js';
 
 export type DbClient = pg.Pool | pg.PoolClient | pg.Client;
 

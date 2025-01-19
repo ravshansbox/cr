@@ -1,9 +1,9 @@
 import express from 'express';
 import { ZodError } from 'zod';
-import { createToken } from './routers/tokens/createToken';
-import { HttpError } from './exceptions';
-import { registerRoute } from './http';
-import { getToken } from './routers/tokens/getToken';
+import { createToken } from './routers/tokens/createToken.js';
+import { HttpError } from './exceptions/index.js';
+import { registerRoute } from './http.js';
+import { getToken } from './routers/tokens/getToken.js';
 
 export const app = express();
 app.use(express.json());
