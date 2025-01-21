@@ -17,10 +17,15 @@ export class Endpoint<_RequestParams> {
   ) {}
 }
 
-type Context<RequestParams, RequestBody> = {
-  params: RequestParams;
-  body: RequestBody;
-};
+type ObjectWithKnownKey<K extends string, T> = T extends {}
+  ? Record<K, T>
+  : Record<never, never>;
+
+type Context<RequestParams, RequestBody> = ObjectWithKnownKey<
+  'params',
+  RequestParams
+> &
+  ObjectWithKnownKey<'body', RequestBody>;
 
 type Process<RequestParams, RequestBody, ResponseBody> = (
   context: Context<RequestParams, RequestBody>,
@@ -45,7 +50,7 @@ export const createHandler = <RequestParams, RequestBody, ResponseBody>({
       body: bodySchema
         ? bodySchema.parse(request.body)
         : (undefined as RequestBody),
-    });
+    } as unknown as Context<RequestParams, RequestBody>);
     response.status(status).json(body);
   };
 };
