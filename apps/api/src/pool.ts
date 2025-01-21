@@ -13,10 +13,19 @@ export const getRows = async <T>(promise: Promise<{ rows: T[] }>) => {
   return rows;
 };
 
-export const getRow = async <T>(
+export function getRow<T>(promise: Promise<{ rows: T[] }>): Promise<T>;
+export function getRow<T>(
+  promise: Promise<{ rows: T[] }>,
+  strict: true,
+): Promise<T>;
+export function getRow<T>(
+  promise: Promise<{ rows: T[] }>,
+  strict: false,
+): Promise<T | undefined>;
+export async function getRow<T>(
   promise: Promise<{ rows: T[] }>,
   strict = true,
-) => {
+) {
   const rows = await getRows(promise);
   if (strict) {
     if (rows.length === 0) {
@@ -27,4 +36,4 @@ export const getRow = async <T>(
     }
   }
   return rows[0];
-};
+}
