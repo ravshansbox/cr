@@ -1,7 +1,20 @@
 services:
+  dbgate:
+    image: dbgate/dbgate
+    environment:
+      CONNECTIONS: CN1
+      LABEL_CN1: postgres://postgres@postgres:5432/postgres
+      SERVER_CN1: postgres
+      USER_CN1: postgres
+      PASSWORD_CN1: postgres
+      PORT_CN1: 5432
+      ENGINE_CN1: postgres@dbgate-plugin-postgres
+    ports:
+      - '127.0.0.1:5433:3000'
   postgres:
     image: postgres
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
       - '127.0.0.1:5432:5432'
+    command: postgres -c log_statement=all
