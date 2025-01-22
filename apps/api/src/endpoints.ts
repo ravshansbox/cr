@@ -6,3 +6,5 @@ export const getTokenEndpoint = new Endpoint<{ id: string }>(
   'get',
   '/tokens/:id',
 );
+
+export const getAllTokensEndpoint = new Endpoint('get', '/tokens');

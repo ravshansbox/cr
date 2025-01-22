@@ -1,9 +1,10 @@
 import express from 'express';
 import { ZodError } from 'zod';
-import { createToken } from './routers/tokens/createToken.js';
 import { HttpError } from './exceptions/index.js';
 import { registerRoute } from './http.js';
+import { createToken } from './routers/tokens/createToken.js';
 import { getToken } from './routers/tokens/getToken.js';
+import { getAllTokens } from './routers/tokens/getAllTokens.js';
 
 export const app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ app.get('/', (_request, response) => {
 
 registerRoute(app, createToken);
 registerRoute(app, getToken);
+registerRoute(app, getAllTokens);
 
 app.use(
   (
