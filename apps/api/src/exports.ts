@@ -1,3 +1,5 @@
+export { Endpoint, type Method } from './shared.js';
+
 export { createTokenEndpoint } from './endpoints.js';
 export { type CreateTokenFetcher } from './routers/tokens/createToken.js';
 
