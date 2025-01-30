@@ -1,4 +1,4 @@
-import { Endpoint } from './http.js';
+import { Endpoint } from './shared.js';
 
 export const createTokenEndpoint = new Endpoint('post', '/tokens');
 
