@@ -22,7 +22,7 @@ export const Navbar: FC = () => {
         </ul>
       </nav>
       <div>
-        <span>User: {authContext.value?.user_id}</span>
+        <span>{authContext.value?.user.username}</span>
         <Button
           variant="link"
           onClick={async () => {

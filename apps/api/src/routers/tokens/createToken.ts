@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import zod from 'zod';
+import * as remeda from 'remeda';
 import { tokenDao } from '../../daos/tokens/index.js';
 import { userDao } from '../../daos/users/index.js';
 import { pool } from '../../pool.js';
@@ -29,7 +30,10 @@ export const createToken = createRoute({
     const token = await tokenDao.createToken(pool, {
       userId: userQuery.output.id,
     });
-    return new HttpResponse(201, token);
+    return new HttpResponse(201, {
+      ...token,
+      user: remeda.omit(userQuery.output, ['password']),
+    });
   },
 });
 
