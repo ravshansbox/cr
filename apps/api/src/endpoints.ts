@@ -8,3 +8,8 @@ export const getTokenEndpoint = new Endpoint<{ id: string }>(
 );
 
 export const getAllTokensEndpoint = new Endpoint('get', '/tokens');
+
+export const deleteTokenEndpoint = new Endpoint<{ id: string }>(
+  'delete',
+  '/tokens/:id',
+);

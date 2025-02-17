@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { Button, Form, Input, Label } from '../core';
-import { api } from '../../api';
+import { Button, Form, Input, Label } from '../components/core';
+import { api } from '../api';
 
 export const Login: FC = () => {
   const navigate = useNavigate();

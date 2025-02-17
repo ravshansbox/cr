@@ -19,6 +19,7 @@ export default tseslint.config(
   {
     rules: {
       '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {

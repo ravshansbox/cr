@@ -1,7 +1,7 @@
 import { FC, use, useEffect } from 'react';
-import { AuthContext } from '../../AuthContext';
 import { useNavigate } from 'react-router';
-import { api } from '../../api';
+import { AuthContext } from '../AuthContext';
+import { api } from '../api';
 
 export const Dashboard: FC = () => {
   const navigate = useNavigate();

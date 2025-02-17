@@ -1,5 +1,14 @@
 import { classed } from '@tw-classed/react';
 
 export const Button = classed('button', {
-  base: 'rounded border border-emerald-400 bg-emerald-400 px-2 py-1 text-white hover:border-emerald-600 hover:bg-emerald-600',
+  base: 'cursor-pointer rounded border px-2 py-1 transition',
+  variants: {
+    variant: {
+      normal: 'bg-blue-500 text-white hover:bg-blue-600',
+      link: 'border-transparent bg-transparent text-blue-500 hover:bg-blue-50 hover:text-blue-600',
+    },
+  },
+  defaultVariants: {
+    variant: 'normal',
+  },
 });

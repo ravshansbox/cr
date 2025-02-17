@@ -5,6 +5,7 @@ import { registerRoute } from './http.js';
 import { createToken } from './routers/tokens/createToken.js';
 import { getToken } from './routers/tokens/getToken.js';
 import { getAllTokens } from './routers/tokens/getAllTokens.js';
+import { deleteToken } from './routers/tokens/deleteToken.js';
 
 export const app = express();
 app.use(express.json());
@@ -17,6 +18,7 @@ app.get('/', (_request, response) => {
 registerRoute(app, createToken);
 registerRoute(app, getToken);
 registerRoute(app, getAllTokens);
+registerRoute(app, deleteToken);
 
 app.use(
   (
