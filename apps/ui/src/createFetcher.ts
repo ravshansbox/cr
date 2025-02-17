@@ -12,7 +12,11 @@ const fetchJson = async <RequestBody, ResponseBody>(
     body: method !== 'get' && body ? JSON.stringify(body) : undefined,
   });
 
-  return response.json() as Promise<ResponseBody>;
+  if (response.ok) {
+    return response.json() as Promise<ResponseBody>;
+  }
+
+  throw new Error(response.statusText);
 };
 
 export const createFetcher = <Fetcher>(endpoint: Endpoint<unknown>) => {

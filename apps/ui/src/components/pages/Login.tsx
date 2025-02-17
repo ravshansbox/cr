@@ -2,11 +2,8 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
-import { Form } from './components/Form';
-import { Label } from './components/Label';
-import { Input } from './components/Input';
-import { Button } from './components/Button';
-import { api } from './api';
+import { Button, Form, Input, Label } from '../core';
+import { api } from '../../api';
 
 export const Login: FC = () => {
   const navigate = useNavigate();

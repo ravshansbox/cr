@@ -1,7 +1,7 @@
 import { FC, use, useEffect } from 'react';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from '../../AuthContext';
 import { useNavigate } from 'react-router';
-import { api } from './api';
+import { api } from '../../api';
 
 export const Dashboard: FC = () => {
   const navigate = useNavigate();
@@ -14,10 +14,15 @@ export const Dashboard: FC = () => {
         await navigate('/login');
         return;
       }
-      const token = await api.getToken({ params: { id: tokenId } });
-      authContext.setValue(token);
+      try {
+        const token = await api.getToken({ params: { id: tokenId } });
+        authContext.setValue(token);
+      } catch {
+        localStorage.removeItem('token');
+        await navigate('/login');
+      }
     })().catch(console.error);
   }, []);
 
-  return <h1>User id: {authContext.value?.user_id}</h1>;
+  return <h1>Dashboard</h1>;
 };
