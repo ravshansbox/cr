@@ -8,6 +8,7 @@ export default mergeConfig(
       css: true,
       environment: 'jsdom',
       globals: true,
+      setupFiles: ['./src/setup.vitest.ts'],
     },
   }),
 );
