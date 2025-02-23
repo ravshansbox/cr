@@ -1,5 +1,6 @@
 import { inject } from 'vitest';
 import { createHttpClient } from './test-utils.js';
+import { pool } from './pool.js';
 
 declare global {
   // eslint-disable-next-line no-var
@@ -9,4 +10,10 @@ declare global {
 beforeAll(() => {
   const baseUrl = inject('baseUrl');
   global.httpClient = createHttpClient(baseUrl);
+});
+
+afterEach(async () => {
+  await pool.query('delete from user_registrations');
+  await pool.query('delete from tokens');
+  await pool.query('delete from users');
 });

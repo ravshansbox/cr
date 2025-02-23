@@ -34,7 +34,5 @@ export default async (project: TestProject) => {
         }
       });
     });
-    await pool.query('delete from tokens');
-    await pool.query('delete from users');
   };
 };
