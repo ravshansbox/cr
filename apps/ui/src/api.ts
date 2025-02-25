@@ -8,6 +8,8 @@ import {
   getAllTokensEndpoint,
   type DeleteTokenFetcher,
   deleteTokenEndpoint,
+  type RegisterUserFetcher,
+  registerUserEndpoint,
 } from '@cloudretail/api';
 
 export const api = {
@@ -15,4 +17,5 @@ export const api = {
   getToken: createFetcher<GetTokenFetcher>(getTokenEndpoint),
   getAllTokens: createFetcher<GetAllTokensFetcher>(getAllTokensEndpoint),
   deleteToken: createFetcher<DeleteTokenFetcher>(deleteTokenEndpoint),
+  registerUser: createFetcher<RegisterUserFetcher>(registerUserEndpoint),
 };

@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { AuthProvider } from './AuthContext';
-import { Dashboard, Login } from './pages';
+import { Dashboard, Login, Register } from './pages';
 
 const routes = [
   { path: '/', Component: Dashboard },
   { path: '/login', Component: Login },
+  { path: '/register', Component: Register },
 ];
 
 export const App: FC = () => {

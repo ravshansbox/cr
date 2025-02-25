@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Button, Form, Input, Label } from '../components/core';
-import { EntryLayout } from '../components';
 import { api } from '../api';
+import { EntryLayout } from '../components';
 
-export const Login: FC = () => {
+export const Register: FC = () => {
   const navigate = useNavigate();
   const form = useForm({ defaultValues: { username: '', password: '' } });
 
@@ -13,9 +13,8 @@ export const Login: FC = () => {
     <EntryLayout>
       <Form
         onSubmit={form.handleSubmit(async (values) => {
-          const token = await api.createToken({ body: values });
-          localStorage.setItem('token', token.token);
-          await navigate('/');
+          await api.registerUser({ body: values });
+          await navigate('/login');
         })}
       >
         <Label text="Username">
@@ -24,7 +23,7 @@ export const Login: FC = () => {
         <Label text="Password">
           <Input type="password" {...form.register('password')} />
         </Label>
-        <Button>Login</Button>
+        <Button>Register</Button>
       </Form>
     </EntryLayout>
   );
