@@ -3,6 +3,11 @@ export const {
   ADMIN_USERNAME = '',
   DATABASE_URL = '',
   HTTP_PORT = '',
+  MAIL_CONFIRMATION_URL = '',
+  MAIL_HOST = '',
+  MAIL_PASSWORD = '',
+  MAIL_PORT = '',
+  MAIL_USERNAME = '',
   MIGRATIONS_DIR = '',
   MIGRATIONS_TABLE = '',
 } = process.env;
