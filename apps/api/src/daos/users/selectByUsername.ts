@@ -11,6 +11,7 @@ export const selectByUsername = (
       username: string;
       password: string;
       is_verified: boolean;
+      email: string;
     }>(sql`select * from users where username = ${values.username}`),
   );
 };

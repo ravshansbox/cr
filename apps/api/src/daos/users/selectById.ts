@@ -8,6 +8,7 @@ export const selectById = (client: DbClient, values: { id: number }) => {
       username: string;
       password: string;
       is_verified: boolean;
+      email: string;
     }>(sql`select * from users where id = ${values.id}`),
   );
 };

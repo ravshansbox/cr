@@ -12,6 +12,7 @@ export const registerUser = createRoute({
   bodySchema: zod.object({
     username: zod.string(),
     password: zod.string(),
+    email: zod.string().email(),
   }),
   process: async ({ body }) => {
     const { user, userRegistration } = await wrapIntoTransaction(
@@ -19,6 +20,7 @@ export const registerUser = createRoute({
         const user = await userDao.createUser(client, {
           username: body.username,
           password: crypto.hash('sha256', body.password),
+          email: body.email,
         });
         const userRegistration =
           await userRegistrationDao.createUserRegistration(client, {

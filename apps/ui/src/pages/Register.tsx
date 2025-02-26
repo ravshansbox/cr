@@ -7,7 +7,9 @@ import { EntryLayout } from '../components';
 
 export const Register: FC = () => {
   const navigate = useNavigate();
-  const form = useForm({ defaultValues: { username: '', password: '' } });
+  const form = useForm({
+    defaultValues: { email: '', username: '', password: '' },
+  });
 
   return (
     <EntryLayout>
@@ -17,6 +19,9 @@ export const Register: FC = () => {
           await navigate('/login');
         })}
       >
+        <Label text="Email">
+          <Input type="email" {...form.register('email')} />
+        </Label>
         <Label text="Username">
           <Input type="text" {...form.register('username')} />
         </Label>

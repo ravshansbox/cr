@@ -12,6 +12,7 @@ export const seed = async (client: DbClient) => {
       const user = await userDao.createUser(client, {
         username: ADMIN_USERNAME,
         password: crypto.hash('sha256', ADMIN_PASSWORD),
+        email: `${ADMIN_USERNAME}@cloudretail.pro`,
       });
       await userDao.setUserVerified(client, { id: user.id });
       console.info('Admin user created');
