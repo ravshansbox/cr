@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import zod from 'zod';
 import * as remeda from 'remeda';
-import { registerUserEndpoint } from '../../endpoints.js';
+import { activateUserEndpoint, registerUserEndpoint } from '../../endpoints.js';
 import { createRoute, Fetcher, HttpResponse } from '../../http.js';
 import { wrapIntoTransaction } from '../../pool.js';
 import { userDao } from '../../daos/users/index.js';
@@ -33,11 +33,15 @@ export const registerUser = createRoute({
         return { user, userRegistration };
       },
     );
+    const path = activateUserEndpoint.toPath({
+      confirmation_code: userRegistration.confirmation_code,
+    });
+    const confirmationUrl = `${MAIL_CONFIRMATION_URL}${path}`;
     await transporter.sendMail({
       from: MAIL_USERNAME,
       to: user.email,
       subject: 'Confirm your email',
-      text: `Please confirm your email by clicking the following link: ${MAIL_CONFIRMATION_URL}/${userRegistration.confirmation_code}`,
+      text: `Please confirm your email by clicking the following link: ${confirmationUrl}`,
     });
     return new HttpResponse(201, {
       user: remeda.omit(user, ['password']),

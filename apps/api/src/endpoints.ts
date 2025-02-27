@@ -15,3 +15,8 @@ export const deleteTokenEndpoint = new Endpoint<{ id: string }>(
 );
 
 export const registerUserEndpoint = new Endpoint('post', '/users');
+
+export const activateUserEndpoint = new Endpoint<{ confirmation_code: string }>(
+  'get',
+  '/users/activate/:confirmation_code',
+);

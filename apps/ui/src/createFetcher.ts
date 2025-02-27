@@ -1,4 +1,3 @@
-import { compile } from 'path-to-regexp';
 import { Endpoint, type Method } from '@cloudretail/api';
 
 const fetchJson = async <RequestBody, ResponseBody>(
@@ -19,16 +18,15 @@ const fetchJson = async <RequestBody, ResponseBody>(
   throw new Error(response.statusText);
 };
 
-export const createFetcher = <Fetcher>(endpoint: Endpoint<unknown>) => {
-  const getUrl = compile(endpoint.path);
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createFetcher = <Fetcher>(endpoint: Endpoint<any>) => {
   const fetcher = ({
     params,
     body,
   }: {
     params: Record<string, string>;
     body: Record<string, unknown>;
-  }) => fetchJson(endpoint.method, `/api${getUrl(params)}`, body);
+  }) => fetchJson(endpoint.method, `/api${endpoint.toPath(params)}`, body);
 
   return fetcher as Fetcher;
 };
