@@ -7,6 +7,7 @@ export class HttpResponse<Body> {
   constructor(
     public readonly status: number,
     public readonly body: Body,
+    public readonly type: 'json' | 'text' = 'json',
   ) {}
 }
 
@@ -55,12 +56,22 @@ const createHandler = <
   Auth
 >): express.RequestHandler<RequestParams, ResponseBody, RequestBody> => {
   return async (request, response) => {
-    const { status, body } = await process({
+    const { status, body, type } = await process({
       auth: auth ? await parseAuth(request.headers.authorization) : undefined,
       params: request.params,
       body: bodySchema ? bodySchema.parse(request.body) : undefined,
     } as unknown as Context<RequestParams, RequestBody, Auth>);
-    response.status(status).json(body);
+    response.status(status);
+    switch (type) {
+      case 'json': {
+        response.json(body);
+        break;
+      }
+      case 'text': {
+        response.end(body);
+        break;
+      }
+    }
   };
 };
 
