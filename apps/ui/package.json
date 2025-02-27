@@ -23,7 +23,6 @@
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.0.0",
     "path-to-regexp": "^8.2.0",
-    "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

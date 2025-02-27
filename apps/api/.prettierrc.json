@@ -1,0 +1,4 @@
+{
+  "plugins": ["prettier-plugin-sql"],
+  "singleQuote": true
+}

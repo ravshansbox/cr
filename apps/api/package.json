@@ -33,6 +33,7 @@
     "@types/nodemailer": "^6.4.17",
     "@types/pg": "^8.11.11",
     "dotenv-cli": "^8.0.0",
+    "prettier-plugin-sql": "^0.18.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.1",

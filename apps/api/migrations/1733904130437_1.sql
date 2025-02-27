@@ -4,5 +4,6 @@ create table users (
   username text not null unique,
   password text not null
 );
+
 -- Down Migration
 drop table users;
