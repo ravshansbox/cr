@@ -20,3 +20,5 @@ export const activateUserEndpoint = new Endpoint<{ confirmation_code: string }>(
   'get',
   '/users/activate/:confirmation_code',
 );
+
+export const createCompanyEndpoint = new Endpoint('post', '/companies');
