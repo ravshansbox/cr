@@ -9,6 +9,7 @@ import { deleteToken } from './routers/tokens/deleteToken.js';
 import { registerUser } from './routers/users/registerUser.js';
 import { activateUser } from './routers/users/activateUser.js';
 import { createCompany } from './routers/companies/createCompany.js';
+import { getCompanies } from './routers/companies/getCompanies.js';
 
 export const app = express();
 app.use(express.json());
@@ -25,6 +26,7 @@ registerRoute(app, deleteToken);
 registerRoute(app, registerUser);
 registerRoute(app, activateUser);
 registerRoute(app, createCompany);
+registerRoute(app, getCompanies);
 
 app.use(
   (

@@ -22,3 +22,5 @@ export const activateUserEndpoint = new Endpoint<{ confirmation_code: string }>(
 );
 
 export const createCompanyEndpoint = new Endpoint('post', '/companies');
+
+export const getCompaniesEndpoint = new Endpoint('get', '/companies');
