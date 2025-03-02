@@ -39,10 +39,12 @@ app.use(
 
     if (error instanceof HttpError) {
       response.status(error.status).json({ error: error.message });
+      return;
     }
 
     if (error instanceof ZodError) {
       response.status(422).json({ error: error.errors });
+      return;
     }
 
     response.status(500).json({ error: 'Something went wrong' });
