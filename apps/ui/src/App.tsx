@@ -1,12 +1,17 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { AuthProvider } from './AuthContext';
-import { Dashboard, Login, Register } from './pages';
+import { Home, Login, MyCompanies, Register } from './pages';
+import { DashboardLayout } from './components';
 
-const routes = [
-  { path: '/', Component: Dashboard },
+const entryRoutes = [
   { path: '/login', Component: Login },
   { path: '/register', Component: Register },
+];
+
+const dashboardRoutes = [
+  { path: '/', Component: Home },
+  { path: '/my-companies', Component: MyCompanies },
 ];
 
 export const App: FC = () => {
@@ -14,12 +19,17 @@ export const App: FC = () => {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {routes.map((route) => (
+          {entryRoutes.map((route) => (
             <Route
               key={route.path}
               path={route.path}
               Component={route.Component}
             />
+          ))}
+          {dashboardRoutes.map((route) => (
+            <Route key={route.path} path="/" Component={DashboardLayout}>
+              <Route path={route.path} Component={route.Component} />
+            </Route>
           ))}
         </Routes>
       </BrowserRouter>

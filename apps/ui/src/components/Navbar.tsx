@@ -4,7 +4,10 @@ import { Button, NavLink } from './core';
 import { api } from '../api';
 import { useNavigate } from 'react-router';
 
-const links = [{ path: '/', label: 'Dashboard' }];
+const links = [
+  { path: '/', label: 'Home' },
+  { path: '/my-companies', label: 'My Companies' },
+];
 
 export const Navbar: FC = () => {
   const navigate = useNavigate();
