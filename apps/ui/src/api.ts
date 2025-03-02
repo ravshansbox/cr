@@ -1,4 +1,4 @@
-import { createFetcher } from './createFetcher';
+import { createFetcher, createHttpClient } from './createFetcher';
 import {
   type CreateTokenFetcher,
   createTokenEndpoint,
@@ -14,11 +14,28 @@ import {
   getCompaniesEndpoint,
 } from '@cloudretail/api';
 
+export const httpClient = createHttpClient();
+
 export const api = {
-  createToken: createFetcher<CreateTokenFetcher>(createTokenEndpoint),
-  getToken: createFetcher<GetTokenFetcher>(getTokenEndpoint),
-  getAllTokens: createFetcher<GetAllTokensFetcher>(getAllTokensEndpoint),
-  deleteToken: createFetcher<DeleteTokenFetcher>(deleteTokenEndpoint),
-  registerUser: createFetcher<RegisterUserFetcher>(registerUserEndpoint),
-  getCompanies: createFetcher<GetCompaniesFetcher>(getCompaniesEndpoint),
+  createToken: createFetcher<CreateTokenFetcher>(
+    httpClient,
+    createTokenEndpoint,
+  ),
+  getToken: createFetcher<GetTokenFetcher>(httpClient, getTokenEndpoint),
+  getAllTokens: createFetcher<GetAllTokensFetcher>(
+    httpClient,
+    getAllTokensEndpoint,
+  ),
+  deleteToken: createFetcher<DeleteTokenFetcher>(
+    httpClient,
+    deleteTokenEndpoint,
+  ),
+  registerUser: createFetcher<RegisterUserFetcher>(
+    httpClient,
+    registerUserEndpoint,
+  ),
+  getCompanies: createFetcher<GetCompaniesFetcher>(
+    httpClient,
+    getCompaniesEndpoint,
+  ),
 };

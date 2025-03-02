@@ -1,13 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Endpoint, type Method } from '@cloudretail/api';
 
-const fetchJson = async <RequestBody, ResponseBody>(
-  method: Method,
-  url: string,
-  body?: RequestBody,
-) => {
+type FetchJsonOptions<RequestBody> = {
+  method: Method;
+  url: string;
+  headers?: Record<string, string>;
+  body?: RequestBody;
+};
+const fetchJson = async <RequestBody, ResponseBody>({
+  method,
+  url,
+  headers,
+  body,
+}: FetchJsonOptions<RequestBody>) => {
   const response = await fetch(url, {
     method,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { ...headers, 'Content-Type': 'application/json' },
     body: method !== 'get' && body ? JSON.stringify(body) : undefined,
   });
 
@@ -18,15 +26,40 @@ const fetchJson = async <RequestBody, ResponseBody>(
   throw new Error(response.statusText);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const createFetcher = <Fetcher>(endpoint: Endpoint<any>) => {
+export const createHttpClient = () => {
+  const clientHeaders = {} as Record<string, string>;
+  return {
+    setHeader: (name: string, value: string) => {
+      clientHeaders[name] = value;
+    },
+    fetchJson: <RequestBody>({
+      headers: requestHeaders,
+      ...options
+    }: FetchJsonOptions<RequestBody>) =>
+      fetchJson({
+        ...options,
+        headers: { ...clientHeaders, ...requestHeaders },
+      }),
+  };
+};
+type HttpClient = ReturnType<typeof createHttpClient>;
+
+export const createFetcher = <Fetcher>(
+  httpClient: HttpClient,
+  endpoint: Endpoint<any>,
+) => {
   const fetcher = ({
     params,
     body,
   }: {
     params: Record<string, string>;
     body: Record<string, unknown>;
-  }) => fetchJson(endpoint.method, `/api${endpoint.toPath(params)}`, body);
+  }) =>
+    httpClient.fetchJson({
+      method: endpoint.method,
+      url: `/api${endpoint.toPath(params)}`,
+      body,
+    });
 
   return fetcher as Fetcher;
 };

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Button, Form, Input, Label } from '../components/core';
 import { EntryLayout } from '../components';
-import { api } from '../api';
+import { api, httpClient } from '../api';
 
 export const Login: FC = () => {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ export const Login: FC = () => {
       <Form
         onSubmit={form.handleSubmit(async (values) => {
           const token = await api.createToken({ body: values });
+          httpClient.setHeader('Authorization', `Bearer ${token.token}`);
           localStorage.setItem('token', token.token);
           await navigate('/');
         })}
