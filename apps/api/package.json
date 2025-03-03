@@ -12,7 +12,8 @@
     "migrate:up": "dotenv npx node-pg-migrate up -- --migrations-table=_migrations --no-verbose",
     "migrate:down": "dotenv npx node-pg-migrate down -- --migrations-table=_migrations --no-verbose",
     "migrate:create": "node-pg-migrate create --migration-file-language sql",
-    "start": "tsx watch --clear-screen=false --env-file=.env src/index.ts"
+    "start": "tsx watch --clear-screen=false --env-file=.env src/index.ts",
+    "test": "dotenv npx vitest"
   },
   "dependencies": {
     "@ts-safeql/sql-tag": "^0.2.1",
@@ -30,6 +31,7 @@
     "dotenv-cli": "^8.0.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.1"
+    "typescript-eslint": "^8.26.1",
+    "vitest": "^3.0.8"
   }
 }
