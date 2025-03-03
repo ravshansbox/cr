@@ -5,10 +5,16 @@
     "apps/*"
   ],
   "scripts": {
+    "checktypes": "npm-run-all --parallel ws:api:checktypes ws:ui:checktypes",
     "format": "prettier --ignore-unknown --write .",
+    "lint": "npm-run-all --parallel ws:api:lint ws:ui:lint",
     "prepare": "husky",
     "start": "npm-run-all --parallel ws:api:start ws:ui:start",
+    "ws:api:checktypes": "npm -w apps/api run checktypes",
+    "ws:api:lint": "npm -w apps/api run lint",
     "ws:api:start": "npm -w apps/api run start",
+    "ws:ui:checktypes": "npm -w apps/ui run checktypes",
+    "ws:ui:lint": "npm -w apps/ui run lint",
     "ws:ui:start": "npm -w apps/ui run start"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@
   "exports": "./src/exports.ts",
   "scripts": {
     "build": "tsc --outDir dist",
+    "checktypes": "tsc --noEmit",
     "docker:compose:up": "docker compose up -d",
     "docker:compose:down": "docker compose down",
     "lint": "eslint --fix .",

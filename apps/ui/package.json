@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "checktypes": "tsc --noEmit",
     "lint": "eslint --fix .",
     "start": "vite"
   },

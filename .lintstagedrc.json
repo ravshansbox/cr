@@ -1,3 +1,5 @@
 {
-  "*": "prettier --ignore-unknown --write"
+  "*": "prettier --ignore-unknown --write",
+  "apps/api/**/*.{js,jsx,ts,tsx}": "npx -w apps/api eslint --fix",
+  "apps/ui/**/*.{js,jsx,ts,tsx}": "npx -w apps/ui eslint --fix"
 }
