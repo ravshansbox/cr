@@ -23,7 +23,9 @@ const fetchJson = async <RequestBody, ResponseBody>({
     return response.json() as Promise<ResponseBody>;
   }
 
-  throw new Error(response.statusText);
+  const result = (await response.json()) as { error: string };
+
+  throw new Error(result.error);
 };
 
 export const createHttpClient = () => {
