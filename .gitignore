@@ -1,4 +1,4 @@
-.env
+.env.local
 .idea
 dist
 node_modules
