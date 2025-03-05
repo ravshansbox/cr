@@ -12,6 +12,8 @@ import {
   registerUserEndpoint,
   type GetCompaniesFetcher,
   getCompaniesEndpoint,
+  CreateCompanyFetcher,
+  createCompanyEndpoint,
 } from '@cloudretail/api';
 
 export const httpClient = createHttpClient();
@@ -37,5 +39,9 @@ export const api = {
   getCompanies: createFetcher<GetCompaniesFetcher>(
     httpClient,
     getCompaniesEndpoint,
+  ),
+  createCompany: createFetcher<CreateCompanyFetcher>(
+    httpClient,
+    createCompanyEndpoint,
   ),
 };

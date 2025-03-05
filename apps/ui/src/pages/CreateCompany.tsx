@@ -4,7 +4,7 @@ import { Button, Form, Input, Label } from '../components/core';
 import { api } from '../api';
 
 type CreateCompanyProps = {
-  onCreate?: () => void;
+  onCreate?: () => void | Promise<void>;
 };
 export const CreateCompany: FC<CreateCompanyProps> = ({ onCreate }) => {
   const form = useForm({ defaultValues: { name: '' } });
@@ -14,7 +14,8 @@ export const CreateCompany: FC<CreateCompanyProps> = ({ onCreate }) => {
       className="w-xs"
       onSubmit={form.handleSubmit(async (values) => {
         await api.createCompany({ body: values });
-        onCreate?.();
+        await onCreate?.();
+        form.reset();
       })}
     >
       <Label text="Name">
