@@ -1,3 +1,5 @@
+import { inject } from 'vitest';
+
 test('true is true', () => {
-  expect(true).toBe(true);
+  expect(inject('baseUrl')).toMatch(/http:\/\/localhost:/);
 });
