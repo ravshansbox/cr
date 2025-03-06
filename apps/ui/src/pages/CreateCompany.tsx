@@ -11,14 +11,14 @@ export const CreateCompany: FC<CreateCompanyProps> = ({ onCreate }) => {
 
   return (
     <Form
-      className="w-xs"
+      layout="row"
       onSubmit={form.handleSubmit(async (values) => {
         await api.createCompany({ body: values });
         await onCreate?.();
         form.reset();
       })}
     >
-      <Label text="Name">
+      <Label text="Name" layout="row">
         <Input type="text" {...form.register('name')} />
       </Label>
       <Button type="submit">Create</Button>
