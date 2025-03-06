@@ -1,3 +1,14 @@
 import { classed } from '../../twClassed';
 
-export const Form = classed('form', { base: 'flex flex-col gap-2' });
+export const Form = classed('form', {
+  base: 'flex gap-2',
+  variants: {
+    layout: {
+      column: 'flex-col',
+      row: 'flex-row',
+    },
+  },
+  defaultVariants: {
+    layout: 'column',
+  },
+});
