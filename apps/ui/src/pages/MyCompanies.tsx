@@ -16,7 +16,7 @@ export const MyCompanies: FC = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <Table
         items={companies.data}
         columns={[
@@ -25,6 +25,6 @@ export const MyCompanies: FC = () => {
         ]}
       />
       <CreateCompany onCreate={companies.fetchData} />
-    </>
+    </div>
   );
 };

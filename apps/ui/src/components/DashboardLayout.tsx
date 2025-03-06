@@ -29,7 +29,7 @@ export const DashboardLayout: FC = () => {
   if (authContext.value === null) return null;
 
   return (
-    <main>
+    <main className="flex flex-col gap-2">
       <Navbar />
       <Outlet />
     </main>
