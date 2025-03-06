@@ -1,4 +1,4 @@
-import { classed } from '@tw-classed/react';
+import { classed } from '../../twClassed';
 
 export const Button = classed('button', {
   base: 'cursor-pointer rounded border px-2 py-1 transition',

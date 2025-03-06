@@ -1,5 +1,6 @@
-import { classed, VariantProps } from '@tw-classed/react';
 import { ComponentProps, FC, PropsWithChildren } from 'react';
+import { VariantProps } from '@tw-classed/react';
+import { classed } from '../../twClassed';
 
 const Aside = classed('aside', {
   variants: {

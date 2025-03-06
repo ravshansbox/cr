@@ -1,5 +1,6 @@
-import { classed, VariantProps } from '@tw-classed/react';
 import { FC, PropsWithChildren } from 'react';
+import { VariantProps } from '@tw-classed/react';
+import { classed } from '../../twClassed';
 
 const LabelCore = classed('label', {
   base: 'flex flex-col',
