@@ -16,7 +16,7 @@ export const Navbar: FC = () => {
   return (
     <header className="flex justify-between">
       <nav>
-        <ul className="flex">
+        <ul className="flex gap-1">
           {links.map((link) => (
             <li key={link.path}>
               <NavLink to={link.path}>{link.label}</NavLink>
@@ -24,7 +24,7 @@ export const Navbar: FC = () => {
           ))}
         </ul>
       </nav>
-      <div>
+      <div className="flex items-center gap-1">
         <span>{authContext.value?.user.username}</span>
         <Button
           variant="link"
