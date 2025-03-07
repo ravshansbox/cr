@@ -107,6 +107,6 @@ export type Fetcher<R> =
     infer Auth
   >
     ? (
-        context: Context<RequestParams, RequestBody, Auth>,
+        context: Omit<Context<RequestParams, RequestBody, Auth>, 'auth'>,
       ) => Promise<ResponseBody>
     : never;

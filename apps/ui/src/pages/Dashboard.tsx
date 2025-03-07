@@ -2,6 +2,7 @@ import { FC, use, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../AuthContext';
 import { api } from '../api';
+import { Navbar } from '../components';
 
 export const Dashboard: FC = () => {
   const navigate = useNavigate();
@@ -24,5 +25,10 @@ export const Dashboard: FC = () => {
     })().catch(console.error);
   }, []);
 
-  return <h1>Dashboard</h1>;
+  return (
+    <main>
+      <Navbar />
+      <h1>Dashboard</h1>
+    </main>
+  );
 };

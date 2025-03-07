@@ -4,6 +4,8 @@ import { Button, NavLink } from './core';
 import { api } from '../api';
 import { useNavigate } from 'react-router';
 
+const links = [{ path: '/', label: 'Dashboard' }];
+
 export const Navbar: FC = () => {
   const navigate = useNavigate();
   const authContext = use(AuthContext);
@@ -12,12 +14,11 @@ export const Navbar: FC = () => {
     <header className="flex justify-between">
       <nav>
         <ul className="flex">
-          <li>
-            <NavLink to="/">Dashboard</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
+          {links.map((link) => (
+            <li key={link.path}>
+              <NavLink to={link.path}>{link.label}</NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
       <div>
