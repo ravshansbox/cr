@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 export const useQuery = <T>(fn: () => Promise<T>) => {
   const [isFetching, setIsFetching] = useState(false);
+  const [hasData, setHasData] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [data, setData] = useState<T | null>(null);
 
@@ -10,6 +11,7 @@ export const useQuery = <T>(fn: () => Promise<T>) => {
     try {
       const data = await fn();
       setData(data);
+      setHasData(true);
     } catch (error) {
       setError(error as Error);
     } finally {
@@ -21,5 +23,5 @@ export const useQuery = <T>(fn: () => Promise<T>) => {
     fetchData().catch(console.error);
   }, []);
 
-  return { isFetching, error, data, fetchData };
+  return { isFetching, hasData, error, data, fetchData };
 };
