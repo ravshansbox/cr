@@ -1,4 +1,4 @@
-import pg, { QueryResult, QueryResultRow } from 'pg';
+import pg, { PoolClient, QueryResult, QueryResultRow } from 'pg';
 import { DATABASE_URL } from './constants.js';
 import { MultipleRecordsFound, NoRecordFound } from './exceptions/index.js';
 
@@ -53,3 +53,20 @@ export async function getRow<T extends QueryResultRow>(
   }
   return rows[0];
 }
+
+export const wrapIntoTransaction = async <T>(
+  fn: (client: PoolClient) => Promise<T>,
+) => {
+  const client = await pool.connect();
+  try {
+    await client.query('begin');
+    const result = await fn(client);
+    await client.query('commit');
+    return result;
+  } catch (error) {
+    await client.query('rollback');
+    throw error;
+  } finally {
+    client.release();
+  }
+};

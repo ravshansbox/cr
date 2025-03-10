@@ -13,3 +13,5 @@ export const deleteTokenEndpoint = new Endpoint<{ id: string }>(
   'delete',
   '/tokens/:id',
 );
+
+export const registerUserEndpoint = new Endpoint('post', '/users');
