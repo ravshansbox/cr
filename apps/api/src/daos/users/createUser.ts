@@ -6,10 +6,15 @@ export const createUser = (
   values: { username: string; password: string },
 ) => {
   return getRow(
-    client.query<{ id: number; username: string; password: string }>(
+    client.query<{
+      id: number;
+      username: string;
+      password: string;
+      is_verified: boolean;
+    }>(
       sql`
-        insert into users (username, password)
-        values (${values.username}, ${values.password})
+        insert into users (username, password, is_verified)
+        values (${values.username}, ${values.password}, false)
         returning *
       `,
     ),

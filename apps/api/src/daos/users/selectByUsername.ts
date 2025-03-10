@@ -6,8 +6,11 @@ export const selectByUsername = (
   values: { username: string },
 ) => {
   return getRow(
-    client.query<{ id: number; username: string; password: string }>(
-      sql`select * from users where username = ${values.username}`,
-    ),
+    client.query<{
+      id: number;
+      username: string;
+      password: string;
+      is_verified: boolean;
+    }>(sql`select * from users where username = ${values.username}`),
   );
 };

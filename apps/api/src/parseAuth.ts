@@ -12,5 +12,6 @@ export const parseAuth = async (authorizationHeader?: string) => {
   if (!tokenId) throw new HttpError(401, 'Invalid bearer token');
   const token = await tokenDao.selectById(pool, { id: tokenId });
   const user = await userDao.selectById(pool, { id: token.user_id });
+  if (!user.is_verified) throw new HttpError(401, 'User is not verified');
   return { token, user };
 };

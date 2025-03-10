@@ -9,10 +9,11 @@ export const seed = async (client: DbClient) => {
     await userDao.selectByUsername(client, { username: ADMIN_USERNAME });
   } catch (error) {
     if (error instanceof NoRecordFound) {
-      await userDao.createUser(client, {
+      const user = await userDao.createUser(client, {
         username: ADMIN_USERNAME,
         password: crypto.hash('sha256', ADMIN_PASSWORD),
       });
+      await userDao.setUserVerified(client, { id: user.id });
       console.info('Admin user created');
     }
   }
