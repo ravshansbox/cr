@@ -1,8 +1,9 @@
 import { FC, use } from 'react';
+import { useNavigate } from 'react-router';
+import { hstack } from '@/styled-system/patterns';
+import { api } from '../api';
 import { AuthContext } from '../AuthContext';
 import { Button, NavLink } from './core';
-import { api } from '../api';
-import { useNavigate } from 'react-router';
 
 const links = [
   { path: '/', label: 'Home' },
@@ -14,9 +15,9 @@ export const Navbar: FC = () => {
   const authContext = use(AuthContext);
 
   return (
-    <header className="flex justify-between">
+    <header className={hstack({ justify: 'space-between' })}>
       <nav>
-        <ul className="flex gap-1">
+        <ul className={hstack()}>
           {links.map((link) => (
             <li key={link.path}>
               <NavLink to={link.path}>{link.label}</NavLink>
@@ -24,7 +25,7 @@ export const Navbar: FC = () => {
           ))}
         </ul>
       </nav>
-      <div className="flex items-center gap-1">
+      <div className={hstack()}>
         <span>{authContext.value?.user.username}</span>
         <Button
           variant="link"

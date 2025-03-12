@@ -38,4 +38,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-member-access': 'off',
     },
   },
+  {
+    ignores: ['src/styled-system/**/*'],
+  },
 );

@@ -18,15 +18,6 @@
     }
   },
   "lsp": {
-    "tailwindcss-language-server": {
-      "settings": {
-        "experimental": {
-          "classRegex": [
-            ["classed(?:\\.\\w*)?\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-          ]
-        }
-      }
-    },
     "vtsls": {
       "autoUseWorkspaceTsdk": true
     }

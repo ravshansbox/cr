@@ -1,10 +1,18 @@
+import url from 'node:url';
 import { defineConfig } from 'vite';
 import viteReact from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   clearScreen: false,
-  plugins: [viteReact(), tailwindcss()],
+  plugins: [viteReact()],
+  resolve: {
+    alias: [
+      {
+        find: '@',
+        replacement: url.fileURLToPath(new url.URL('./src', import.meta.url)),
+      },
+    ],
+  },
   server: {
     proxy: {
       '/api': {

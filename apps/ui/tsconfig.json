@@ -5,6 +5,9 @@
     "lib": ["dom", "es2015"],
     "module": "esnext",
     "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext"

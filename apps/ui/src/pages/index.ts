@@ -1,3 +1,4 @@
+export { CreateCompany } from './CreateCompany';
 export { Home } from './Home';
 export { Login } from './Login';
 export { MyCompanies } from './MyCompanies';

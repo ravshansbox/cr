@@ -1,11 +1,19 @@
-import { classed } from '../../twClassed';
+import { styled } from '@/styled-system/jsx';
 
-export const Form = classed('form', {
-  base: 'flex gap-2',
+export const Form = styled('form', {
+  base: {
+    display: 'flex',
+    gap: '2',
+    flexDirection: 'column',
+  },
   variants: {
     layout: {
-      column: 'flex-col',
-      row: 'flex-row',
+      column: {
+        flexDirection: 'column',
+      },
+      row: {
+        flexDirection: 'row',
+      },
     },
   },
   defaultVariants: {

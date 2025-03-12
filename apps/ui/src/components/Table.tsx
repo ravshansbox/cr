@@ -1,3 +1,5 @@
+import { css } from '@/styled-system/css';
+
 type Column<T> = {
   title: string;
   getData: (item: T) => string;
@@ -10,26 +12,36 @@ export function Table<T>({ items, columns }: TableProps<T>) {
   if (!items) return null;
 
   return (
-    <table className="table w-full">
-      <thead className="table-header-group">
-        <tr className="table-row">
+    <table className={css({ w: 'full' })}>
+      <thead>
+        <tr>
           {columns.map((column) => (
             <th
               key={column.title}
-              className="table-cell border border-gray-200 p-2"
+              className={css({
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'gray.200',
+                p: 2,
+              })}
             >
               {column.title}
             </th>
           ))}
         </tr>
       </thead>
-      <tbody className="table-row-group">
+      <tbody>
         {items.map((item, index) => (
-          <tr key={index} className="table-row">
+          <tr key={index}>
             {columns.map((column) => (
               <td
                 key={column.title}
-                className="table-cell border border-gray-200 p-2"
+                className={css({
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'gray.200',
+                  p: 2,
+                })}
               >
                 {column.getData(item)}
               </td>

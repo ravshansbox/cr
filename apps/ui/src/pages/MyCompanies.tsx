@@ -1,8 +1,9 @@
 import { FC } from 'react';
+import { stack } from '@/styled-system/patterns';
 import { api } from '../api';
 import { useQuery } from '../useQuery';
-import { Table } from '../components/Table';
-import { CreateCompany } from './CreateCompany';
+import { Table } from '../components';
+import { CreateCompany } from '.';
 
 export const MyCompanies: FC = () => {
   const companies = useQuery(() => api.getCompanies({}));
@@ -16,7 +17,7 @@ export const MyCompanies: FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className={stack()}>
       <Table
         items={companies.data}
         columns={[

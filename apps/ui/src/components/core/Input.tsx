@@ -1,5 +1,11 @@
-import { classed } from '../../twClassed';
+import { styled } from '@/styled-system/jsx';
 
-export const Input = classed('input', {
-  base: 'rounded border border-slate-300 px-2 py-1',
+export const Input = styled('input', {
+  base: {
+    borderRadius: 'md',
+    borderWidth: '1px',
+    borderColor: 'slate.300',
+    paddingX: '2',
+    paddingY: '1',
+  },
 });

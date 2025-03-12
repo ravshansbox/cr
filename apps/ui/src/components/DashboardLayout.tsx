@@ -1,8 +1,9 @@
 import { FC, use, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
-import { Navbar } from '.';
-import { AuthContext } from '../AuthContext';
+import { stack } from '@/styled-system/patterns';
 import { api, httpClient } from '../api';
+import { AuthContext } from '../AuthContext';
+import { Navbar } from '.';
 
 export const DashboardLayout: FC = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export const DashboardLayout: FC = () => {
   if (authContext.value === null) return null;
 
   return (
-    <main className="flex flex-col gap-2">
+    <main className={stack({ gap: 2 })}>
       <Navbar />
       <Outlet />
     </main>

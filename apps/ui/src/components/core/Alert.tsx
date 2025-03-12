@@ -1,13 +1,12 @@
 import { ComponentProps, FC, PropsWithChildren } from 'react';
-import { VariantProps } from '@tw-classed/react';
-import { classed } from '../../twClassed';
+import { styled } from '@/styled-system/jsx';
 
-const Aside = classed('aside', {
+const Aside = styled('aside', {
   variants: {
     type: {
-      info: 'text-blue-500',
-      warning: 'text-yellow-500',
-      error: 'text-red-500',
+      info: { color: 'blue.500' },
+      warning: { color: 'yellow.500' },
+      error: { color: 'red.500' },
     },
   },
 });
@@ -24,7 +23,7 @@ const typeAriaLiveMap: Record<Type, ComponentProps<'aside'>['aria-live']> = {
   error: 'assertive',
 };
 
-type Type = Exclude<VariantProps<typeof Aside>['type'], undefined>;
+type Type = Exclude<ComponentProps<typeof Aside>['type'], undefined>;
 export const Alert: FC<PropsWithChildren<{ type?: Type }>> = ({
   children,
   type = 'info',
