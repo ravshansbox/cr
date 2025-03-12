@@ -2,7 +2,6 @@ import http from 'node:http';
 import net from 'node:net';
 import { TestProject } from 'vitest/node';
 import { app } from './app.js';
-import { pool } from './pool.js';
 
 declare module 'vitest' {
   export interface ProvidedContext {
@@ -20,7 +19,9 @@ export default async (project: TestProject) => {
       project.provide('baseUrl', `http://localhost:${port}`);
       resolve();
     });
-    server.on('request', app);
+    server.on('request', (request, response) => {
+      app.lookup(request, response);
+    });
     server.listen();
   });
 

@@ -1,5 +1,7 @@
 import { Endpoint } from './shared.js';
 
+export const checkHealthEndpoint = new Endpoint('get', '/');
+
 export const createTokenEndpoint = new Endpoint('post', '/tokens');
 
 export const getTokenEndpoint = new Endpoint<{ id: string }>(

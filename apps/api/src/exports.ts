@@ -1,6 +1,7 @@
 export { Endpoint, type Method } from './shared.js';
 
 export {
+  checkHealthEndpoint,
   createTokenEndpoint,
   getTokenEndpoint,
   getAllTokensEndpoint,
@@ -9,6 +10,8 @@ export {
   createCompanyEndpoint,
   getCompaniesEndpoint,
 } from './endpoints.js';
+
+export { type CheckHealthFetcher } from './routers/checkHealth.js';
 
 export { type CreateTokenFetcher } from './routers/tokens/createToken.js';
 
