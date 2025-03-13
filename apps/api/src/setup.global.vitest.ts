@@ -1,6 +1,7 @@
 import http from 'node:http';
 import net from 'node:net';
 import { TestProject } from 'vitest/node';
+import { migrateUp, migrateDown } from '@ravshansbox/pg-migrate';
 import { app } from './app.js';
 
 declare module 'vitest' {
@@ -10,6 +11,8 @@ declare module 'vitest' {
 }
 
 export default async (project: TestProject) => {
+  await migrateDown();
+  await migrateUp();
   let server: http.Server;
   await new Promise<void>((resolve, reject) => {
     server = http.createServer();
@@ -26,6 +29,7 @@ export default async (project: TestProject) => {
   });
 
   return async () => {
+    await migrateDown();
     await new Promise<void>((resolve, reject) => {
       server.close((error) => {
         if (error) {
