@@ -1,18 +1,21 @@
 import { FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { stack } from '@/styled-system/patterns';
 import { api } from '../api';
-import { useQuery } from '../useQuery';
 import { Table } from '../components';
 import { CreateCompany } from '.';
 
 export const MyCompanies: FC = () => {
-  const companies = useQuery(() => api.getCompanies({}));
+  const companies = useQuery({
+    queryKey: ['companies'],
+    queryFn: () => api.getCompanies({}),
+  });
 
-  if (!companies.hasData) {
+  if (companies.isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (companies.error) {
+  if (companies.isError) {
     return <div>Something went wrong</div>;
   }
 
@@ -25,7 +28,11 @@ export const MyCompanies: FC = () => {
           { title: 'Role', getData: (item) => item.role },
         ]}
       />
-      <CreateCompany onCreate={companies.fetchData} />
+      <CreateCompany
+        onCreate={async () => {
+          await companies.refetch();
+        }}
+      />
     </div>
   );
 };

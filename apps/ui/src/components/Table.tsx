@@ -5,11 +5,11 @@ type Column<T> = {
   getData: (item: T) => string;
 };
 type TableProps<T> = {
-  items: T[] | null;
+  items: T[] | undefined;
   columns: Column<T>[];
 };
 export function Table<T>({ items, columns }: TableProps<T>) {
-  if (!items) return null;
+  if (items === undefined) return null;
 
   return (
     <table className={css({ w: 'full' })}>
